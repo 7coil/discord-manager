@@ -1,6 +1,7 @@
 {
-	"discord-manager": {
+	"manager": {
 		"sysadmin": "190519304972664832",
 		"version": "2017.04.15",
+		"port": 8080
 	}
 }

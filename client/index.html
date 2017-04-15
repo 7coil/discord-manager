@@ -1,241 +1,67 @@
+<!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+		<title>Parallax Template - Materialize</title>
+
+		<!-- CSS  -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<title>moustacheminer.com</title>
-		<meta name="description" content="moustacheminer.com">
-		<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hcjalmlcbgeieaddjghjbkdiegpigbnk">
-		<link rel="icon" type="image/png" href="favicon.png">
-		<style>
-			#section {
-				height: auto;
-			}
-		</style>
+		<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	</head>
 	<body>
 		<nav class="light-blue lighten-1" >
 			<div class="nav-wrapper container">
-				<div class="brand-logo">moustacheminer</div>
+				<div class="brand-logo">discord manager</div>
 			</div>
 		</nav>
+
 		<main>
-			<!-- Hong Kong -->
-			<div id="index-banner" class="parallax-container" style="height: 70%;">
-				<div class="section no-pad-bot">
-					<div class="container">
-						<br>
-						<br>
-						<h1 class="center light-blue-text text-lighten-2">moustacheminer</h1>
-						<div class="row center">
-							<h3 center class="light-blue-text">server services</h3>
-						</div>
-					</div>
-				</div>
-				<div class="parallax">
-					<img src="/img/background.jpg" class="background">
-				</div>
-			</div>
 
-			<!-- Discord and MSS-Discord -->
-			<div id="section" class="parallax-container">
-				<div class="container">
-					<div class="section">
-						<div class="row center">
-							<h4>Join our Discord!</h4>
-							<p class="light">
-								Join us where we talk about everything we do, everything we don't do, and everything else inbetween!
-							</p>
-						</div>
-						<div class="row center">
-							<a href="https://discord.gg/wHgdmf4" class="btn-large waves-effect waves-light light-blue">Join</a>
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<div class="section">
-						<div class="row center">
-							<h4>MSS-Discord</h4>
-							<p class="light">
-								Moustacheminer Server Services for Discord is another bot made in Discord.js, not only being designed for modularity and easy programming in mind, but to also easily interact with the bot.
-							</p>
-						</div>
-						<div class="row center">
-							<a href="https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632" class="btn-large waves-effect waves-light light-blue">Invite</a>
-						</div>
-						<div class="row center">
-							<a href="https://github.com/moustacheminer/MSS-Discord">GitHub for MSS-Discord</a>
-							<p class="light" id="mss-discord-git">Loading GitHub info...</p>
-						</div>
-					</div>
-				</div>
-				<div class="parallax">
-					<img src="/img/discord.png" class="background" style="opacity: 0.2;">
-				</div>
-			</div>
-
-			<!-- XML-Discord -->
-			<div id="section" class="parallax-container">
-				<div class="container">
-					<div class="section">
-						<div class="row center">
-							<h4>&lt;title&gt;XML-Discord&lt;/title&gt;</h4>
-							<p class="light">
-								&lt;text&gt;XML-Discord is exactly like MSS-Discord, but with 100% more XML. XML-Discord supports all the commands you know and love, but in XML form.&lt;/text&gt;
-							</p>
-						</div>
-						<div class="row center">
-							<a href="https://discordapp.com/oauth2/authorize?=&client_id=301442466878586881&scope=bot&permissions=0" class="btn-large waves-effect waves-light light-blue">Invite</a>
-						</div>
-						<div class="row center">
-							<a href="https://github.com/moustacheminer/MSS-Discord/tree/xml">GitHub for XML-Discord</a>
-						</div>
-					</div>
-				</div>
-				<div class="parallax">
-					<img src="/img/xml.jpg" class="background" style="opacity: 0.1;">
-				</div>
-			</div>
-
-			<!-- Virtual Machine -->
-			<div id="section" class="parallax-container">
-				<div class="container">
-					<div class="section">
-						<div class="row center">
-							<h4>Random Virtual Machine</h4>
-							<p class="light">
-								A virtual machine is running for anyone to touch. Resets whenever somebody reinstalls an operating system.
-							</p>
-						</div>
-						<div class="row center">
-							<a href="http://vnc.moustacheminer.com/" class="btn-large waves-effect waves-light light-blue">Connect to noVNC</a>
-						</div>
-					</div>
-				</div>
-				<div class="parallax">
-					<img src="/img/xp.jpg" class="background" style="opacity: 0.3;">
-				</div>
-			</div>
-
-			<!-- Reddit -->
+			<!-- Guilds list -->
 			<div class="section">
-				<div class="row center">
-					<h4>Reddit</h4>
-				</div>
-				<div class="row center">
-					<h5>Reddit Clone</h5>
-					<p class="light">
-						The Reddit clone aims to host all April Fools since 2015, starting with /r/thebutton, /r/joinrobin and now /r/place. It currently has issues with /r/thebutton and /r/place.
-					</p>
-					<a href="http://reddit.moustacheminer.com/" class="btn-large waves-effect waves-light light-blue">Reddit MSS Clone</a>
-					<a class="btn-large waves-effect waves-light light-blue" onclick="chrome.webstore.install('https://chrome.google.com/webstore/detail/hcjalmlcbgeieaddjghjbkdiegpigbnk')">RES for MSS</a>
-				</div>
-			</div>
-
-			<!-- The Button -->
-			<div class="section">
-				<div class="row center">
-					<h6>2015</h6>
-					<h5>The Button</h5>
-					<a href="http://reddit.moustacheminer.com/r/thebutton"><img src="/img/button.gif"></a>
-					<p><i>Click the button to enter /r/thebutton</i></p>
-				</div>
-				<div class="row center">
-					<a href="https://github.com/lepon01/reddit-plugin-thebutton">GitHub for reddit-plugin-thebutton</a><br>
-					<p class="light" id="reddit-plugin-thebutton-git">Loading GitHub info...</p>
-				</div>
-			</div>
-
-			<!-- Robin -->
-			<div id="section" class="parallax-container">
-				<div class="container">
-					<div class="section">
-						<div class="row center">
-							<h6>2016</h6>
-							<h5>Robin</h5>
-							<a href="/robin/parrot.user.js" class="btn-large waves-effect waves-light light-blue">Parrot for MSS</a>
-							<a href="http://reddit.moustacheminer.com/robin" class="btn-large waves-effect waves-light light-blue">Enter Robin</a>
-						</div>
-						<div class="row center">
-							<a href="https://github.com/lepon01/reddit-plugin-robin">GitHub for reddit-plugin-robin</a>
-							<p class="light" id="reddit-plugin-robin-git">Loading GitHub info...</p>
-						</div>
+				<div class="row">
+					<div class="col s12 m12">
+						<h4>Guilds</h4>
 					</div>
-				</div>
-				<div class="parallax">
-					<img src="/img/cckufiprfashlewoligtmufogenasmwt1.png" class="background" style="opacity: 0.05;">
-				</div>
-			</div>
-
-
-			<!-- Place -->
-			<div id="section" class="parallax-container">
-				<div class="container">
-					<div class="section">
-						<div class="row center">
-							<h6>2017</h6>
-							<h5>Place</h5>
-							<a href="/place/" class="btn-large waves-effect waves-light light-blue">Place Search</a>
-							<a href="https://placedevs.reddit.com/" class="btn-large waves-effect waves-light light-blue">/r/PlaceDevs</a>
-							<a href="http://reddit.moustacheminer.com/r/place" class="btn-large waves-effect waves-light light-blue">Enter Place</a>
-						</div>
-						<div class="row center">
-							<a href="https://github.com/lepon01/reddit-plugin-place-opensource">GitHub for reddit-plugin-place-opensource</a>
-							<p class="light" id="reddit-plugin-place-opensource-git">Loading GitHub info...</p>
-						</div>
+					<div class="col s12 m12">
+						<ul class="collapsible" data-collapsible="accordion" id="guilds">
+							<li>
+								<div class="collapsible-header">Example</div>
+								<div class="collapsible-body">
+									<img style="float: right" src="https://cdn.discordapp.com/icons/110373943822540800/47336ad0631ac7aac0a48a2ba6246c65.png">
+									<h5>Basic Info</h5>
+									<p><b>Name: </b> Example</p>
+									<p><b>Member Count: </b> 800</p>
+									<p><b>Bots: </b> 799</p>
+								</div>
+							</li>
+						</ul>
 					</div>
-				</div>
-				<div class="parallax">
-					<img src="/img/place.png" class="background" style="opacity: 0.05;">
-				</div>
-			</div>
-
-			<!-- DiscordLink -->
-			<div id="section" class="parallax-container">
-				<div class="container">
-					<div class="section">
-						<div class="row center">
-							<h4>DiscordLink</h4>
-							<p class="light">
-								A single channel. Everything goes through it.
-							</p>
-						</div>
-						<div class="row center">
-							<h5>Select a client</h5>
-							<a href="https://chat.infra.link/" class="btn-large waves-effect waves-light light-blue">HTML5</a>
-							<a href="https://apps.getpebble.com/applications/5888d12395ce5b51a40000f2" class="btn-large waves-effect waves-light light-blue">Pebble</a>
-							<a href="https://discord.gg/59D43wC" class="btn-large waves-effect waves-light light-blue">Discord</a>
-						</div>
-						<div class="row center">
-							<a href="https://github.com/lepon01/discordlink">GitHub for DiscordLink</a>
-							<p class="light" id="discordlink-git">Loading GitHub info...</p>
-							<a href="https://github.com/lepon01/discordlinkpebble">Github for DiscordLinkPebble</a>
-							<p class="light" id="discordlinkpebble-git">Loading GitHub info...</p>
-						</div>
-					</div>
-				</div>
-				<div class="parallax">
-					<img src="/img/cloudpebble.png" class="background" style="opacity: 0.1;">
 				</div>
 			</div>
 		</main>
+
 		<footer class="page-footer light-blue lighten-1" style="margin: 0px;">
 			<div class="container">
 				<div class="row">
 					<div class="col s12">
-						<p class="grey-text text-lighten-4">The header image is technically misleading, we're based in the UK, not Hong Kong.</p>
+						<p class="grey-text text-lighten-4">Cheese</p>
 					</div>
 				</div>
 			</div>
 			<div class="footer-copyright light-blue">
 				<div class="container">
-					&#169 2015 - 2017 moustacheminer.com
+					&#169 2015 - 2017 discordmanager.com
 				</div>
 			</div>
-			<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-			<script type="text/javascript" src="/js/materialize.min.js"></script>
-			<script type="text/javascript" src="/js/init.js"></script>
-			<script type="text/javascript" src="/js/git.js"></script>
 		</footer>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script src="client.js"></script>
+		<script src="js/materialize.js"></script>
+		<script src="js/init.js"></script>
 	</body>
 </html>

@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/moustacheminer/discord-manager/issues"
   },
-  "homepage": "https://github.com/moustacheminer/discord-manager#readme"
+  "homepage": "https://github.com/moustacheminer/discord-manager#readme",
+  "dependencies": {
+    "discord.js": "^11.0.0",
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  }
 }

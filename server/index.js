@@ -1,3 +1,7 @@
+//Include configs and APIs
+var config = require('./config.json');
+var api = require('./api.json');
+
 //Include everything for socket.io and for the webserver
 var express = require('express');
 var app = express();
@@ -11,9 +15,8 @@ var path = require('path');
 var Discord = require('discord.js');
 var client = new Discord.Client();
 
-//Include configs and APIs
-var config = require('config.json');
-var api = require('api.json');
+//Login to Discord
+client.login(api.discord);
 
 //Select the "client" folder for the webserver to use as root
 app.use(express.static(path.join(__dirname, '../client/')));
@@ -22,23 +25,49 @@ app.use(express.static(path.join(__dirname, '../client/')));
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
 
-
+	//Start the webserver on the port in the config.json, or if not set, use 8080
+	server.listen(config.manager.port || 8080);
 
 	//Start checking for connections when the client has started.
 	io.on('connection', function (socket) {
-		socket.on("user", function (data) {
 
-		});
-		socket.on("message", function (data) {
+		//If the client wants guilds, we got guilds!
+		socket.on("guilds", function() {
+			var guilds = client.guilds.array();
+			var message = [];
 
+			client.guilds.forEach(function(element, i){
+				console.log(i);
+				var botcount = 0;
+
+				element.members.forEach(function(member){
+					if(member.bot) {
+						console.log(member.id);
+						console.log("Is a bot");
+						botcount++;
+					}
+				});
+
+				message[i] = {
+					"name": element.name,
+					"id": element.id,
+					"icon": element.icon,
+					"members": element.memberCount,
+					"bots": botcount,
+					"owner": element.ownerID
+				}
+			});
+
+			socket.emit("guilds", {
+				error: false,
+				message: JSON.stringify(message)
+			});
 		});
+
 	});
 
 });
 
-server.listen(process.env.PORT || 8080);
-
-
-client.on('message', function(message) {
-
+process.on("unhandledRejection", function(err) {
+  console.error("Uncaught Promise Error: \n" + err.stack);
 });
