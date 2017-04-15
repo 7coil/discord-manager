@@ -33,7 +33,55 @@ client.on('ready', function() {
 
 		//If the client wants guilds, we got guilds!
 		socket.on("guilds", function() {
-			var guilds = client.guilds.array();
+			console.log("Scanning all guilds");
+			var message = [];
+
+			client.guilds.forEach(function(element){
+				var botcount = 0;
+				var usercount = 0;
+
+				element.members.forEach(function(member){
+					usercount++;
+					if(member.user.bot) {
+						botcount++;
+					}
+				});
+
+
+				message.push({
+					name: element.name,
+					id: element.id,
+					icon: element.icon,
+					members: element.memberCount,
+					bots: botcount,
+					owner: element.ownerID
+				});
+			});
+
+			console.log("Sending guild data");
+			socket.emit("guilds", {
+				error: false,
+				message: JSON.stringify(message)
+			});
+
+			console.log("Sending notification");
+			socket.emit("notify", {
+				error: false,
+				message: "Guilds loaded"
+			});
+		});
+
+
+		//==========================================
+		// Purge Function
+		//==========================================
+		//
+		//	This is called when the client wants to
+		//	purge channels, over a certain bot/user
+		//  percentage. Default is 40% bots.
+		//
+		socket.on("purge", function(data) {
+			console.log("Scanning all guilds");
 			var message = [];
 
 			client.guilds.forEach(function(element){
@@ -45,25 +93,19 @@ client.on('ready', function() {
 					}
 				});
 
-				console.log(element.name);
-
-				message.push({
-					"name": element.name,
-					"id": element.id,
-					"icon": element.icon,
-					"members": element.memberCount,
-					"bots": botcount,
-					"owner": element.ownerID
-				});
+				if((botcount / element.memberCount) > 0.4) {
+					socket.emit("notify", {
+						error: false,
+						message: "Left " + element.name
+					});
+				}
 			});
 
-			socket.emit("guilds", {
+			socket.emit("notify", {
 				error: false,
-				message: JSON.stringify(message)
+				message: "Finished purge"
 			});
 		});
-
-
 
 	});
 

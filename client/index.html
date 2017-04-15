@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-		<title>Parallax Template - Materialize</title>
+		<title>Discord Manager</title>
 
 		<!-- CSS  -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,7 +13,7 @@
 	<body>
 		<nav class="light-blue lighten-1" role="navigation">
 			<div class="nav-wrapper container">
-				<div class="brand-logo white-text">Discord Bot Manager</div>
+				<div class="brand-logo white-text">Discord Manager</div>
 			</div>
 		</nav>
 
@@ -24,6 +24,7 @@
 				<div class="row">
 					<div class="col s12 m12">
 						<h4>Guilds</h4>
+						<a class="waves-effect waves-light btn" onclick="socket.emit('purge')">Purge 40% or more bots</a>
 					</div>
 					<div class="col s12 m12">
 						<ul class="collapsible" data-collapsible="accordion" id="guilds">

@@ -41,11 +41,13 @@ socket.on("guilds", function(data) {
 		header.setAttribute("class", "collapsible-header");
 		body.setAttribute("class", "collapsible-body");
 
-		//Add an image
-		var icon = document.createElement("img");
-		icon.setAttribute("src", "https://cdn.discordapp.com/icons/" + element.id + "/" + element.icon + ".png")
-		icon.setAttribute("style", "float: right; background-color: #8B9EDC;")
-		body.appendChild(icon);
+		//Add an image, if it exists
+		if (element.icon) {
+			var icon = document.createElement("img");
+			icon.setAttribute("src", "https://cdn.discordapp.com/icons/" + element.id + "/" + element.icon + ".png")
+			icon.setAttribute("style", "float: right; background-color: #8B9EDC;")
+			body.appendChild(icon);
+		}
 
 		//Add a subheading
 		var head1 = document.createElement("h5");
@@ -74,4 +76,9 @@ socket.on("guilds", function(data) {
 		html["guilds"].appendChild(li);
 	});
 
+});
+
+socket.on("notify", function(data){
+	console.log(data.message);
+	Materialize.toast(data.message, 4000);
 });
