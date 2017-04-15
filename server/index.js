@@ -31,7 +31,14 @@ client.on('ready', function() {
 	//Start checking for connections when the client has started.
 	io.on('connection', function (socket) {
 
-		//If the client wants guilds, we got guilds!
+		//==========================================
+		// Guilds Function
+		//==========================================
+		//
+		//	This is called when the client wants to
+		//	get the list of all the guilds to
+		//	display.
+		//
 		socket.on("guilds", function() {
 			console.log("Scanning all guilds");
 			var message = [];
@@ -78,7 +85,7 @@ client.on('ready', function() {
 		//
 		//	This is called when the client wants to
 		//	purge channels, over a certain bot/user
-		//  percentage. Default is 40% bots.
+		//  percentage. Set to 40% bots
 		//
 		socket.on("purge", function(data) {
 			console.log("Scanning all guilds");
