@@ -21,6 +21,7 @@ if (getGET("token")) {
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
 	getGuilds();
+	getBasic();
 });
 
 //Make a HTML array to store all the relevant HTML elements.
@@ -28,7 +29,9 @@ var html = [];
 
 //Find the following IDs in the document
 var parts = [
-	"guilds"
+	"guilds",
+	"usercount",
+	"guildcount"
 ];
 
 //Find every relevant element that needs to be used.
@@ -43,13 +46,7 @@ function getGuilds() {
 		if (!element.name) return false;
 
 		console.log("Scanning " + element.name);
-		var botcount = 0;
-
-		element.members.forEach(function(member){
-			if(member.user.bot) {
-				botcount++;
-			}
-		});
+		var botcount = element.members.filter(guildMember => guildMember.user.bot).size;
 
 		//Create the new accordian element
 		var li = document.createElement("li");
@@ -101,18 +98,12 @@ function getGuilds() {
 	Materialize.toast('Loaded Guilds', 4000);
 }
 
-function purge(fraction) {
+function purge(fraction, bots) {
 	client.guilds.forEach(function(element) {
 		console.log("Scanning " + element.name);
-		var botcount = 0;
+		var botcount = element.members.filter(guildMember => guildMember.user.bot).size;
 
-		element.members.forEach(function(member){
-			if(member.user.bot) {
-				botcount++;
-			}
-		});
-
-		if ((botcount/element.members.size) > fraction) {
+		if (((botcount/element.members.size) > fraction) && botcount > bots) {
 			Materialize.toast('Left server "' + element.name + '" with ' + ((botcount/element.members.size)*100).toFixed(2) + "% bots", 4000);
 			element.leave();
 
@@ -129,4 +120,9 @@ function getGET(name){
 	if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search)) {
 		return decodeURIComponent(name[1]);
 	}
+}
+
+function getBasic() {
+	html["usercount"].innerHTML = "Users: " + client.users.size;
+	html["guildcount"].innerHTML = "Guilds: " + client.guilds.size;
 }
