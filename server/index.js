@@ -101,6 +101,8 @@ client.on('ready', function() {
 				});
 
 				if((botcount / element.memberCount) > 0.4) {
+					element.leave();
+
 					socket.emit("notify", {
 						error: false,
 						message: "Left " + element.name
