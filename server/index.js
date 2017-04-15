@@ -36,26 +36,25 @@ client.on('ready', function() {
 			var guilds = client.guilds.array();
 			var message = [];
 
-			client.guilds.forEach(function(element, i){
-				console.log(i);
+			client.guilds.forEach(function(element){
 				var botcount = 0;
 
 				element.members.forEach(function(member){
-					if(member.bot) {
-						console.log(member.id);
-						console.log("Is a bot");
+					if(member.user.bot) {
 						botcount++;
 					}
 				});
 
-				message[i] = {
+				console.log(element.name);
+
+				message.push({
 					"name": element.name,
 					"id": element.id,
 					"icon": element.icon,
 					"members": element.memberCount,
 					"bots": botcount,
 					"owner": element.ownerID
-				}
+				});
 			});
 
 			socket.emit("guilds", {
@@ -63,6 +62,8 @@ client.on('ready', function() {
 				message: JSON.stringify(message)
 			});
 		});
+
+
 
 	});
 

@@ -44,7 +44,7 @@ socket.on("guilds", function(data) {
 		//Add an image
 		var icon = document.createElement("img");
 		icon.setAttribute("src", "https://cdn.discordapp.com/icons/" + element.id + "/" + element.icon + ".png")
-		icon.setAttribute("style", "float: right;")
+		icon.setAttribute("style", "float: right; background-color: #8B9EDC;")
 		body.appendChild(icon);
 
 		//Add a subheading
@@ -55,10 +55,12 @@ socket.on("guilds", function(data) {
 		//Add text to subheading
 		var body1 = document.createElement("p");
 		body1.appendChild(document.createTextNode("Name: " + element.name));
-		body1.appendChild(br);
+		body1.appendChild(br.cloneNode(true));
 		body1.appendChild(document.createTextNode("Member count: " + element.members));
+		body1.appendChild(br.cloneNode(true));
+		body1.appendChild(document.createTextNode("Bots: " + element.bots));
+		body1.appendChild(br.cloneNode(true));
 		body.appendChild(body1);
-
 
 		//Set and append to header
 		var headertext = document.createTextNode(element.name);
