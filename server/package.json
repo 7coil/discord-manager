@@ -1,0 +1,22 @@
+{
+  "name": "discord-manager",
+  "version": "2017.4.15",
+  "description": "A webserver to view bot statistics from your web browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moustacheminer/discord-manager.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "admin@moustacheminer.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moustacheminer/discord-manager/issues"
+  },
+  "homepage": "https://github.com/moustacheminer/discord-manager#readme"
+}
