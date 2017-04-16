@@ -20,6 +20,7 @@ if (getGET("token")) {
 //Wait until the client is ready
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
+	loadSliders();
 	getGuilds();
 	getBasic();
 });
@@ -31,7 +32,12 @@ var html = [];
 var parts = [
 	"guilds",
 	"usercount",
-	"guildcount"
+	"botcount",
+	"totalcount",
+	"guildcount",
+	"botminimum",
+	"botpercentage",
+	"botpurgereally"
 ];
 
 //Find every relevant element that needs to be used.
@@ -98,22 +104,34 @@ function getGuilds() {
 	Materialize.toast('Loaded Guilds', 4000);
 }
 
-function purge(fraction, bots) {
+function purge() {
+	bots = html["botminimum"].noUiSlider.get();
+	fraction = (html["botpercentage"].noUiSlider.get())/100;
+
 	client.guilds.forEach(function(element) {
 		console.log("Scanning " + element.name);
 		var botcount = element.members.filter(guildMember => guildMember.user.bot).size;
 
 		if (((botcount/element.members.size) > fraction) && botcount > bots) {
-			Materialize.toast('Left server "' + element.name + '" with ' + ((botcount/element.members.size)*100).toFixed(2) + "% bots", 4000);
-			element.leave();
+			if(html["botpurgereally"].checked) {
+				Materialize.toast('Left server "' + element.name + '" with ' + ((botcount/element.members.size)*100).toFixed(2) + "% bots", 4000);
+				element.leave();
 
-			var li = document.getElementById(element.id);
-			li.innerHTML = "";
-			delete li;
+				var li = document.getElementById(element.id);
+				li.innerHTML = "";
+				delete li;
+			} else {
+				Materialize.toast(element.name + '" with ' + ((botcount/element.members.size)*100).toFixed(2) + "% bots will be purged.", 4000);
+			}
 		}
 	});
 
-	Materialize.toast('Finished purge.', 4000);
+	if(html["botpurgereally"].checked) {
+		Materialize.toast('Finished purge.', 4000);
+	} else {
+		Materialize.toast('Pre-purge analysis finished', 4000);
+	}
+
 }
 
 function getGET(name){
@@ -123,6 +141,39 @@ function getGET(name){
 }
 
 function getBasic() {
-	html["usercount"].innerHTML = "Users: " + client.users.size;
+	var botcount = client.users.filter(guildMember => guildMember.bot).size;
+	var usercount = client.users.size - botcount;
+
+	html["usercount"].innerHTML = "Users: " + usercount;
+	html["botcount"].innerHTML = "Bots: " + botcount;
+	html["totalcount"].innerHTML = "Total: " + client.users.size;
 	html["guildcount"].innerHTML = "Guilds: " + client.guilds.size;
+}
+
+function loadSliders() {
+	noUiSlider.create(html["botminimum"], {
+		start: [20],
+		connect: true,
+		step: 1,
+		range: {
+			'min': 0,
+			'max': 100
+		},
+		format: wNumb({
+			decimals: 0
+		})
+	});
+
+	noUiSlider.create(html["botpercentage"], {
+		start: [40],
+		connect: true,
+		step: 5,
+		range: {
+			'min': 5,
+			'max': 100
+		},
+		format: wNumb({
+			decimals: 0
+		})
+	});
 }

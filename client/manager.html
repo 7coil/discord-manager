@@ -9,6 +9,7 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 		<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="css/nouislider.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	</head>
 	<body>
 		<nav class="light-blue lighten-1" role="navigation">
@@ -24,6 +25,8 @@
 					<div class="col s12 m12">
 						<h4>Basic Stats</h4>
 						<p id="usercount">Users: Loading...</p>
+						<p id="botcount">Bots: Loading...</p>
+						<p id="totalcount">Total: Loading...</p>
 						<p id="guildcount">Guilds: Loading...</p>
 					</div>
 				</div>
@@ -33,7 +36,25 @@
 				<div class="row">
 					<div class="col s12 m12">
 						<h4>Guilds</h4>
-						<a class="waves-effect waves-light btn" onclick="purge(0.4);">Purge 40% > bots</a>
+						<h5>Purge Utility</h5>
+						<div class="input-field">
+							<h6>Minimum number of bots</h6>
+							<div id="botminimum"></div>
+							<h6>Percentage of bots in group</h6>
+							<div id="botpercentage"></div>
+						</div>
+						<br>
+						<a class="waves-effect waves-light btn" onclick="purge();">Curse Purge Plus</a>
+						<br><br>
+						<div class="switch">
+							<label>
+								Test
+								<input type="checkbox" id="botpurgereally">
+								<span class="lever"></span>
+								Purge
+							</label>
+						</div>
+						<br>
 					</div>
 					<div class="col s12 m12">
 						<ul class="collapsible" data-collapsible="accordion" id="guilds">
@@ -70,5 +91,6 @@
 		<script src="js/manager.js"></script>
 		<script src="js/materialize.js"></script>
 		<script src="js/init.js"></script>
+		<script src="js/nouislider.min.js"></script>
 	</body>
 </html>
