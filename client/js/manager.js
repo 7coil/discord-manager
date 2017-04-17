@@ -5,6 +5,7 @@ if (getGET("token")) {
 	//Login to Discord
 	client.login(getGET("token"))
 		.catch(function(error) {
+			error = encodeURIComponent(error);
 			window.location.href = 'index.html?error=' + error;
 		});
 } else {
@@ -106,15 +107,27 @@ function getGuilds() {
 
 function purge() {
 	bots = html["botminimum"].noUiSlider.get();
-	fraction = (html["botpercentage"].noUiSlider.get())/100;
+	fraction = html["botpercentage"].noUiSlider.get()/100;
+	percentage = html["botpercentage"].noUiSlider.get() + "%";
 
 	client.guilds.forEach(function(element) {
 		console.log("Scanning " + element.name);
+    	console.dir(element);
+
 		var botcount = element.members.filter(guildMember => guildMember.user.bot).size;
 
 		if (((botcount/element.members.size) > fraction) && botcount > bots) {
 			if(html["botpurgereally"].checked) {
 				Materialize.toast('Left server "' + element.name + '" with ' + ((botcount/element.members.size)*100).toFixed(2) + "% bots", 4000);
+
+				let embed = new Discord.RichEmbed()
+					.setDescription("Your server '" + element.name + "' has been identified as a bot collection server. As a result, this bot has automatically left your server.")
+					.addField("Set Values", "More than " + bots + " bots with " + percentage + " of users as bots.", true)
+					.addField("Your Values", botcount + " bots with " + ((botcount/element.members.size)*100).toFixed(2) + "% of users as bots.", true)
+					.setFooter("DiscordManager by moustacheminer.com");
+
+				element.owner.user.sendEmbed(embed, "");
+
 				element.leave();
 
 				var li = document.getElementById(element.id);
