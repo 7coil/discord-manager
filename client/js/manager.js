@@ -94,7 +94,7 @@ function getGuilds() {
 		//Add a button to purge the guild
 		var buddon1 = document.createElement("a");
 		buddon1.setAttribute("class", "waves-effect waves-light btn");
-		buddon1.setAttribute("onclick", `removeGuild(${element.id});`);
+		buddon1.setAttribute("onclick", `removeGuild("${element.id}");`);
 		buddon1.appendChild(document.createTextNode("Curse Purge Plus");
 		body.appendChild(buddon1);
 
