@@ -161,6 +161,10 @@ function removeGuild(guildid) {
 		.setDescription("This bot has been removed from " + guild.name)
 		.setFooter("DiscordManager by moustacheminer.com");
 
+	var li = document.getElementById(element.id);
+	li.innerHTML = "";
+	delete li;
+
 	element.owner.user.sendEmbed(embed, "");
 
 	guild.leave();
