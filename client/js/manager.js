@@ -71,7 +71,7 @@ function getGuilds() {
 		//Add an image, if it exists
 		if (element.icon) {
 			var icon = document.createElement("img");
-			icon.setAttribute("src", "https://cdn.discordapp.com/icons/" + element.id + "/" + element.icon + ".png")
+			icon.setAttribute("src", `https://cdn.discordapp.com/icons/${element.id}/${element.icon}.png`)
 			icon.setAttribute("style", "float: right; background-color: #8B9EDC;")
 			body.appendChild(icon);
 		}
@@ -90,6 +90,12 @@ function getGuilds() {
 		body1.appendChild(document.createTextNode("Bots: " + botcount));
 		body1.appendChild(br.cloneNode(true));
 		body.appendChild(body1);
+
+		//Add a button to purge the guild
+		var buddon1 = document.createElement("a");
+		buddon1.setAttribute("class", "waves-effect waves-light btn");
+		buddon1.setAttribute("onclick", `removeGuild(${element.id});`);
+		body.appendChild(buddon1);
 
 		//Set and append to header
 		var headertext = document.createTextNode(element.name);
@@ -145,6 +151,19 @@ function purge() {
 		Materialize.toast('Pre-purge analysis finished', 4000);
 	}
 
+}
+
+function removeGuild(guildid) {
+	let guild = client.guilds.get(guildid);
+	Materialize.toast(`Left ${guild.name}`, 4000);
+
+	let embed = new Discord.RichEmbed()
+		.setDescription("This bot has been removed from " + guild.name)
+		.setFooter("DiscordManager by moustacheminer.com");
+
+	element.owner.user.sendEmbed(embed, "");
+
+	guild.leave();
 }
 
 function getGET(name){
