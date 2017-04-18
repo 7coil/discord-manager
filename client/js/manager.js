@@ -113,9 +113,9 @@ function getGuilds() {
 }
 
 function purge() {
-	bots = html["botminimum"].noUiSlider.get();
-	fraction = html["botpercentage"].noUiSlider.get()/100;
-	percentage = html["botpercentage"].noUiSlider.get() + "%";
+	let bots = html["botminimum"].noUiSlider.get();
+	let fraction = html["botpercentage"].noUiSlider.get()/100;
+	let percentage = html["botpercentage"].noUiSlider.get() + "%";
 
 	client.guilds.forEach(function(element) {
 		console.log("Scanning " + element.name);
@@ -133,9 +133,11 @@ function purge() {
 					.addField("Your Values", botcount + " bots with " + ((botcount/element.members.size)*100).toFixed(2) + "% of users as bots.", true)
 					.setFooter("DiscordManager by moustacheminer.com");
 
-				element.owner.user.sendEmbed(embed, "");
-
-				element.leave();
+				try {
+					element.owner.user.sendEmbed(embed, "");
+				} finally {
+					element.leave();
+				}
 
 				var li = document.getElementById(element.id);
 				li.innerHTML = "";
@@ -166,9 +168,12 @@ function removeGuild(guildid) {
 	li.innerHTML = "";
 	delete li;
 
-	guild.owner.user.sendEmbed(embed, "");
+	try {
+		guild.owner.user.sendEmbed(embed, "");
+	} finally {
+		guild.leave();
+	}
 
-	guild.leave();
 }
 
 function getGET(name){
