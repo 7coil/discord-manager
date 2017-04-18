@@ -95,7 +95,7 @@ function getGuilds() {
 		var buddon1 = document.createElement("a");
 		buddon1.setAttribute("class", "waves-effect waves-light btn");
 		buddon1.setAttribute("onclick", `removeGuild("${element.id}");`);
-		buddon1.appendChild(document.createTextNode("Curse Purge Plus");
+		buddon1.appendChild(document.createTextNode("Curse Purge Plus"));
 		body.appendChild(buddon1);
 
 		//Set and append to header
