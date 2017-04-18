@@ -166,7 +166,7 @@ function removeGuild(guildid) {
 	li.innerHTML = "";
 	delete li;
 
-	element.owner.user.sendEmbed(embed, "");
+	guild.owner.user.sendEmbed(embed, "");
 
 	guild.leave();
 }
