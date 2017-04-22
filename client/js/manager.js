@@ -117,7 +117,7 @@ function purge() {
 	let fraction = html["botpercentage"].noUiSlider.get()/100;
 	let percentage = html["botpercentage"].noUiSlider.get() + "%";
 
-	client.guilds.forEach(function(element) {
+	client.guilds.forEach((element) => {
 		console.log("Scanning " + element.name);
     	console.dir(element);
 
