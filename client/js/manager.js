@@ -49,10 +49,12 @@ parts.forEach(function(part) {
 function getGuilds() {
 	html["guilds"].innerHTML = "";
 
-	client.guilds.forEach(function(element) {
+	client.guilds.forEach((element) => {
 		if (!element.name) return false;
 
 		console.log("Scanning " + element.name);
+		console.dir(element);
+
 		var botcount = element.members.filter(guildMember => guildMember.user.bot).size;
 
 		//Create the new accordian element
