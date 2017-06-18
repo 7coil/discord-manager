@@ -100,7 +100,7 @@ function removeModal(bot, minimum, percentage) { // eslint-disable-line no-unuse
 		html.modal.innerHTML = Mustache.render(`
 			<div class="modal-content">
 				<h4>Prune guilds with more than {{ percentage }}% bots and at least {{ minimum }} total accounts</h4>
-				<p>This action will get rid of the following {{ count }} guilds.</p>
+				<p>This action will get rid of the following {{ count }} guild(s).</p>
 				<ul>
 					{{ #guilds }}
 					<li>{{ name }} with {{ percentage }}% bots.</li>
