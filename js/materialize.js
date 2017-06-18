@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /*!
  * Materialize v0.98.1 (http://materializecss.com)
  * Copyright 2014-2015 Materialize

@@ -22,3 +22,9 @@ If you haven't, it can:
 
 - Display users and bots in each guild
 - View each guild's beautiful icon
+
+## Thanks!
+
+discord.js
+
+mustache.js
