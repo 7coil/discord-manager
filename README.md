@@ -2,7 +2,9 @@
 This project allows to view bot statistics from your web browser.
 
 ## How?
-Just download the ZIP, and open index.html
+Just download the ZIP, and open index.html  
+If it complains, try emptying cache and hard reloading. You can do this in Google Chrome and Chromium by pressing `CTRL+SHIFT+I`, then right clicking the refresh button, then select `empty cache and hard reload`.  
+Please and only then complain after doing this.
 
 ## Features
 
