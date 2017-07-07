@@ -152,7 +152,7 @@ const usernameModal = () => { // eslint-disable-line no-unused-vars
 const avatarModal = () => { // eslint-disable-line no-unused-vars
 	html.modal.innerHTML = `
 		<div class="modal-content">
-			<h4>Set username</h4>
+			<h4>Set avatar</h4>
 			<div class="file-field input-field col s12 m8">
 				<div class="btn">
 					<span>File</span>
