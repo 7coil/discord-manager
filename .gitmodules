@@ -1,8 +1,8 @@
-[submodule "js/discord"]
-	path = js/discord
-	url = git@github.com:hydrabolt/discord.js.git
-	branch = webpack
 [submodule "js/mustache"]
 	path = js/mustache
 	url = git@github.com:janl/mustache.js.git
 	branch = master
+[submodule "js/discord"]
+	path = js/discord
+	url = git@github.com:hydrabolt/discord.js.git
+	branch = webpack
