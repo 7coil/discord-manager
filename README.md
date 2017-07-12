@@ -3,7 +3,12 @@ This project allows to view bot statistics from your web browser.
 
 ## How?
 Git clone this repository, then run this to retrieve the submodules from hydrabolt and mustache.js
-`git pull && git submodule init && git submodule update && git submodule status`
+
+### https
+`git clone --recursive https://github.com/moustacheminer/discord-manager.git`
+
+### ssh
+`git clone --recursive git@github.com:moustacheminer/discord-manager.git`
 
 You will need a SSH key to do this. Alternatively, download the zip from all repositories, and place files where they belong.
 
