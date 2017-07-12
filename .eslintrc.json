@@ -12,7 +12,9 @@
 	"globals": {
 		"Discord": true,
 		"Materialize": true,
-		"Mustache": true
+		"Mustache": true,
+		"SmoothieChart": true,
+		"TimeSeries": true
 	},
 	"rules": {
 		"indent": [2, "tab"],

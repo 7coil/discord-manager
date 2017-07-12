@@ -7,12 +7,50 @@ const parts = [
 	'guilds',
 	'modal',
 	'percentagebots',
-	'minimumusers'
+	'minimumusers',
+	'users',
+	'guilds'
 ];
+
+const graphs = [
+	'user',
+	'guild'
+];
+
+const canvas = {};
 
 // Find every relevant element that needs to be used.
 parts.forEach((part) => {
 	html[part] = document.getElementById(part);
+});
+
+const chartconfig = {
+	responsive: true,
+	grid: {
+		fillStyle: '#ffffff',
+		strokeStyle: '#aaaaaa',
+		millisPerLine: 6000,
+	},
+	labels: {
+		fillStyle: '#000000'
+	},
+	millisPerPixel: 100,
+	verticalSections: 0,
+	timestampFormatter: SmoothieChart.timeFormatter
+};
+
+const lineconfig = {
+	lineWidth: 2,
+	strokeStyle: '#0000ff',
+	fillStyle: 'rgba(0,0,255,0.28)'
+};
+
+graphs.forEach((graph) => {
+	console.log(graph);
+	const chart = new SmoothieChart(chartconfig);
+	canvas[graph] = new TimeSeries();
+	chart.addTimeSeries(canvas[graph], lineconfig);
+	chart.streamTo(document.getElementById(`${graph}chart`), 500);
 });
 
 const get = (name) => {
@@ -295,4 +333,8 @@ client.on('ready', () => {
 	Materialize.toast('Successfully connected to Discord!', 4000);
 	renderBotStats(client);
 	renderGuildsStats(client);
+	setInterval(() => {
+		canvas.user.append(new Date(), client.users.size);
+		canvas.guild.append(new Date(), client.guilds.size);
+	}, 100);
 });
