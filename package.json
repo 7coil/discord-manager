@@ -14,5 +14,8 @@
   "bugs": {
     "url": "https://github.com/moustacheminer/discord-manager/issues"
   },
-  "homepage": "https://github.com/moustacheminer/discord-manager#readme"
+  "homepage": "https://github.com/moustacheminer/discord-manager#readme",
+  "dependencies": {
+    "eslint": "^4.2.0"
+  }
 }

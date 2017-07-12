@@ -46,7 +46,9 @@ const guildStats = (bot, guildid) => {
 		users: guild.members.filter(guildMember => !guildMember.user.bot).size,
 		bots: guild.members.filter(guildMember => guildMember.user.bot).size,
 		total: guild.members.size,
-		percentage: Math.floor((guild.members.filter(guildMember => guildMember.user.bot).size / guild.members.size) * 100)
+		percentage: Math.floor((guild.members.filter(guildMember => guildMember.user.bot).size / guild.members.size) * 100),
+		textchannels: guild.channels.filterArray(channel => channel.type === 'text'),
+		owner: guild.owner
 	};
 };
 const renderBotStats = (bot) => {
@@ -113,8 +115,9 @@ const removeModal = (bot, minimum, percentage) => { // eslint-disable-line no-un
 	}
 };
 const messageModal = (bot, guildid) => { // eslint-disable-line no-unused-vars
-	if (!bot.guilds.get(guildid).owner) {
-		Materialize.toast('This guild doesn\'t have an owner', 4000);
+	const stats = guildStats(bot, guildid);
+	if (stats.owner && stats.users === 0) {
+		Materialize.toast('There is nobody to message! (No owner or users)', 4000);
 	} else {
 		html.modal.innerHTML = Mustache.render(`
 			<div class="modal-content">
@@ -123,13 +126,26 @@ const messageModal = (bot, guildid) => { // eslint-disable-line no-unused-vars
 					<textarea id="message" class="materialize-textarea"></textarea>
 					<label for="message">Message</label>
 				</div>
+				<div class="input-field col s12">
+					<select class="browser-default" id="location">
+						<option value="none" disabled selected>Select a channel</option>
+						<optgroup label="Locations">
+							<option value="owner" {{ ^owner }}disabled{{ /owner }}>Owner</option>
+							<option value="default">Default Channel</option>
+						</optgroup>
+						<optgroup label="Channels">
+							{{ #textchannels }}
+							<option value="{{ id }}">#{{ name }}</option>
+							{{ /textchannels }}
+						</optgroup>
+					</select>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<a class="modal-action modal-close waves-effect waves-light btn-flat">Cancel</a>
-				<a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="messageOwner(client, '{{ id }}', document.getElementById('message').value)">Owner</a>
-				<a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="messageGeneral(client, '{{ id }}', document.getElementById('message').value)">General</a>
+				<a class="modal-action waves-effect waves-green btn-flat" onclick="messageGuild(client, '{{ id }}', document.getElementById('location').value, document.getElementById('message').value)">Send</a>
 			</div>
-		`, guildStats(bot, guildid));
+		`, stats);
 		$('#modal').modal('open');
 	}
 };
@@ -184,29 +200,47 @@ const previewAvatar = (img, file) => { // eslint-disable-line no-unused-vars
 		reader.readAsDataURL(file);
 	}
 };
-const messageOwner = (bot, guildid, text) => { // eslint-disable-line no-unused-vars
-	if (!bot.guilds.get(guildid).owner) {
-		Materialize.toast('This guild doesn\'t have an owner', 4000);
+const messageGuild = (bot, guildid, where, text) => { // eslint-disable-line no-unused-vars
+	const guild = bot.guilds.get(guildid);
+
+	if (where === 'none') {
+		Materialize.toast('Please select a guild', 4000);
+	} else if (!guild) {
+		Materialize.toast('This guild does not exist.', 4000);
+		$('#modal').modal('close');
+	} else if (where === 'owner') {
+		if (guild.owner) {
+			guild.owner.createDM().then((dm) => {
+				dm.send(text)
+					.then(() => {
+						Materialize.toast('Sent message to owner', 4000);
+					})
+					.catch((err) => {
+						Materialize.toast(`Error in sending message: ${err.message}`, 4000);
+					});
+			});
+		} else {
+			Materialize.toast('This guild doesn\'t have an owner', 4000);
+		}
+		$('#modal').modal('close');
 	} else {
-		bot.guilds.get(guildid).owner.createDM().then((dm) => {
-			dm.send(text)
-				.then(() => {
-					Materialize.toast('Sent message', 4000);
-				})
+		let channel = null;
+		if (where === 'default') {
+			channel = guild.defaultChannel;
+		} else {
+			channel = guild.channels.get(where);
+		}
+
+		if (channel) {
+			channel.send(text)
 				.catch((err) => {
-					Materialize.toast(`Error in sending message: ${err.message}`, 4000);
+					Materialize.toast(err.message, 4000);
 				});
-		});
+		} else {
+			Materialize.toast('This guild doesn\'t have this channel', 4000);
+		}
+		$('#modal').modal('close');
 	}
-};
-const messageGeneral = (bot, guildid, text) => { // eslint-disable-line no-unused-vars
-	bot.guilds.get(guildid).defaultChannel.send(text)
-		.then(() => {
-			Materialize.toast('Sent message.', 4000);
-		})
-		.catch((err) => {
-			Materialize.toast(`Error in sending message: ${err.message}`, 4000);
-		});
 };
 const changeUsername = (bot, text) => { // eslint-disable-line no-unused-vars
 	if (!text) {
