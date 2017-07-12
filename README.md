@@ -10,7 +10,7 @@ Git clone this repository, then run this to retrieve the submodules from hydrabo
 ### ssh
 `git clone --recursive git@github.com:moustacheminer/discord-manager.git`
 
-You will need a SSH key to do this. Alternatively, download the zip from all repositories, and place files where they belong.
+Alternatively, download the zip from all repositories, and place files where they belong.
 
 Then open `index.html`
 
